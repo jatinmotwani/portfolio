@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-feature-settings: "ss03" 1, "ss01" 1, "liga" 0;
+  font-family: 'Parkinsans','sans-serif';
+  position: relative;
+  min-height: 100dvh;
+}
