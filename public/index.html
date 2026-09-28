@@ -1,15 +1,36 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="en">
 
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <link rel="icon" href="<%= BASE_URL %>working.png">
+  <title>Jatin Motwani — Backend Software Engineer</title>
+  <meta name="description"
+    content="Jatin Motwani is a backend software engineer in Bengaluru with 6.5+ years building scalable Node.js, TypeScript and PostgreSQL systems.">
+  <meta name="theme-color" content="#0a0a0f">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Jatin Motwani — Backend Software Engineer">
+  <meta property="og:description"
+    content="6.5+ years building scalable Node.js, TypeScript and PostgreSQL systems. Currently SDE 2 at Yocket.">
+  <meta property="og:image" content="https://jatinmotwani.github.io/portfolio/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/svg+xml" href="<%= BASE_URL %>favicon.svg">
+  <link rel="alternate icon" href="<%= BASE_URL %>working.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Parkinsans:wght@300..800&display=swap" rel="stylesheet">
-  <title>Jatin Motwani | Portfolio</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <script>
+    // Apply the saved/system theme before first paint to avoid a flash.
+    try {
+      var theme = localStorage.getItem('theme');
+      if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      }
+    } catch (e) { /* storage unavailable */ }
+  </script>
 </head>
 
 <body>

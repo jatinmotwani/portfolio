@@ -2,9 +2,98 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  font-feature-settings: "ss03" 1, "ss01" 1, "liga" 0;
-  font-family: 'Parkinsans','sans-serif';
-  position: relative;
-  min-height: 100dvh;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    @apply bg-zinc-50 text-zinc-800 antialiased dark:bg-[#0a0a0f] dark:text-zinc-200;
+    min-height: 100dvh;
+  }
+
+  ::selection {
+    @apply bg-emerald-400/30;
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .card {
+    @apply rounded-2xl border border-zinc-200 bg-white/70 backdrop-blur-sm
+      dark:border-zinc-800 dark:bg-zinc-900/50;
+  }
+
+  .chip {
+    @apply inline-flex items-center rounded-full border border-zinc-200 bg-zinc-100 px-2.5 py-1 font-mono text-xs
+      text-zinc-600 dark:border-zinc-700/80 dark:bg-zinc-800/60 dark:text-zinc-300;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold transition
+      focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:ring-offset-2
+      focus-visible:ring-offset-zinc-50 dark:focus-visible:ring-offset-[#0a0a0f];
+  }
+
+  .btn-primary {
+    @apply btn bg-emerald-500 text-zinc-950 shadow-lg shadow-emerald-500/20 hover:bg-emerald-400;
+  }
+
+  .btn-ghost {
+    @apply btn border border-zinc-300 text-zinc-800 hover:border-emerald-500 hover:text-emerald-600
+      dark:border-zinc-700 dark:text-zinc-200 dark:hover:border-emerald-400 dark:hover:text-emerald-400;
+  }
+
+  .icon-link {
+    @apply inline-flex h-11 w-11 items-center justify-center rounded-xl border border-zinc-200 text-zinc-600 transition
+      hover:-translate-y-0.5 hover:border-emerald-500 hover:text-emerald-600
+      focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400
+      dark:border-zinc-800 dark:text-zinc-400 dark:hover:border-emerald-400 dark:hover:text-emerald-400;
+  }
+}
+
+/* Faint blueprint grid used behind the hero. */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgb(113 113 122 / 0.12) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(113 113 122 / 0.12) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, #000 40%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, #000 40%, transparent 100%);
+}
+
+.caret {
+  display: inline-block;
+  width: 0.55ch;
+  animation: caret-blink 1s steps(1) infinite;
+}
+
+@keyframes caret-blink {
+  50% { opacity: 0; }
+}
+
+/* Scroll-reveal (see src/directives/reveal.js). */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal--in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .caret {
+    animation: none;
+  }
 }
