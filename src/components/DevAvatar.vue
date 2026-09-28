@@ -4,141 +4,148 @@
       class="group block w-full rounded-full focus:outline-none focus-visible:ring-4 focus-visible:ring-emerald-400/60"
       :aria-pressed="cool" aria-label="Illustrated avatar of Jatin — click to toggle sunglasses" @click="toggleCool">
       <svg viewBox="0 0 400 400" class="block w-full h-auto drop-shadow-2xl" role="img"
-        aria-label="Illustrated avatar of Jatin: swept-back dark hair, full beard, beige shirt">
+        aria-label="Illustrated avatar of Jatin: swept-back black hair, thick eyebrows, full black beard, beige shirt">
         <defs>
-          <clipPath :id="id('clip')"><circle cx="200" cy="200" r="196" /></clipPath>
-          <linearGradient :id="id('bg')" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#34d399" />
-            <stop offset="1" stop-color="#0f766e" />
-          </linearGradient>
-          <linearGradient :id="id('lens')" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#1f2937" />
-            <stop offset="1" stop-color="#030712" />
-          </linearGradient>
-          <pattern :id="id('weave')" width="7" height="6" patternUnits="userSpaceOnUse">
-            <path d="M0 3 Q1.75 0.5 3.5 3 T7 3" fill="none" stroke="#9c7a5a" stroke-width="0.9" opacity=".5" />
-          </pattern>
-          <clipPath :id="id('eyeL')"><path :d="eyeLeft" /></clipPath>
-          <clipPath :id="id('eyeR')"><path :d="eyeRight" /></clipPath>
-        </defs>
+            <clipPath :id="id('clip')"><circle cx="200" cy="200" r="196" /></clipPath>
+            <linearGradient :id="id('bg')" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#34d399" /><stop offset="1" stop-color="#0f766e" /></linearGradient>
+            <radialGradient :id="id('skin')" cx="200" cy="175" r="118" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#eebfa9" /><stop offset=".55" stop-color="#e0aa93" /><stop offset="1" stop-color="#c98f79" />
+            </radialGradient>
+            <linearGradient :id="id('hair')" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a2b31" /><stop offset="1" stop-color="#141519" /></linearGradient>
+            <linearGradient :id="id('beardG')" x1="0" y1="172" x2="0" y2="322" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#2e2a2d" stop-opacity=".5" /><stop offset=".28" stop-color="#2b272b" stop-opacity=".82" /><stop offset=".48" stop-color="#262326" /><stop offset="1" stop-color="#151315" /></linearGradient>
+            <radialGradient :id="id('iris')" cx=".45" cy=".4" r=".6"><stop offset="0" stop-color="#553626" /><stop offset="1" stop-color="#22160f" /></radialGradient>
+            <pattern :id="id('weave')" width="7" height="6" patternUnits="userSpaceOnUse"><path d="M0 3 Q1.75 0.5 3.5 3 T7 3" fill="none" stroke="#9c7a5a" stroke-width="0.9" opacity=".5" /></pattern>
+            <filter :id="id('tiny')" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="1.2" /></filter>
+            <filter :id="id('soft')" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="2.4" /></filter>
+            <filter :id="id('softer')" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="4.5" /></filter>
+            <clipPath :id="id('eyeL')"><path :d="eyeLeft" /></clipPath>
+            <clipPath :id="id('eyeR')"><path :d="eyeRight" /></clipPath>
+            <clipPath :id="id('face')"><path d="M124 150 C122 108 150 86 200 86 C250 86 278 108 276 150 L276 214 C275 262 244 304 200 308 C156 304 125 262 124 214 Z" /></clipPath>
+            <linearGradient :id="id('lens')" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1f2937" /><stop offset="1" stop-color="#030712" /></linearGradient>
+            <clipPath :id="id('stache')"><path :d="moustache" /></clipPath>
+          </defs>
+          <g :clip-path="url('clip')">
+            <circle cx="200" cy="200" r="196" :fill="url('bg')" />
+            <g font-family="'JetBrains Mono', monospace" font-weight="700" fill="#ecfdf5" opacity=".18">
+              <text x="40" y="120" font-size="34">{ }</text><text x="302" y="118" font-size="30">&lt;/&gt;</text>
+              <text x="326" y="250" font-size="26">;</text><text x="36" y="250" font-size="24">=&gt;</text>
+            </g>
 
-        <g :clip-path="url('clip')">
-          <circle cx="200" cy="200" r="196" :fill="url('bg')" />
-          <g font-family="'JetBrains Mono', monospace" font-weight="700" fill="#ecfdf5" opacity=".18">
-            <text x="44" y="120" font-size="34">{ }</text>
-            <text x="300" y="112" font-size="30">&lt;/&gt;</text>
-            <text x="318" y="250" font-size="26">;</text>
-            <text x="40" y="250" font-size="24">=&gt;</text>
-          </g>
+            <!-- neck + shirt -->
+            <path d="M160 262 L160 330 C176 346 224 346 240 330 L240 262 Z" fill="#c08670" />
+            <path :d="shirt" fill="#c4a084" />
+            <path :d="shirt" :fill="url('weave')" />
+            <path d="M168 306 L232 306 L200 366 Z" fill="#c08670" />
+            <path d="M200 362 L200 430" stroke="#a5846a" stroke-width="3" />
+            <circle cx="200" cy="384" r="4.5" fill="#efe4d4" /><circle cx="200" cy="418" r="4.5" fill="#efe4d4" />
+            <path d="M152 286 C158 300 170 320 197 362 L162 352 L136 304 Z" fill="#d3b294" />
+            <path d="M248 286 C242 300 230 320 203 362 L238 352 L264 304 Z" fill="#d3b294" />
+            <path d="M152 286 C158 300 170 320 197 362 M248 286 C242 300 230 320 203 362" fill="none" stroke="#a5846a" stroke-width="2" />
 
-          <!-- neck -->
-          <path d="M166 248 L166 318 C180 334 220 334 234 318 L234 248 Z" fill="#b97b5a" />
+            <!-- head (tilts toward the cursor) -->
+            <g class="avatar-head" :style="{ transform: `rotate(${tilt}deg)` }">
+            <!-- hair (back mass) -->
+            <path d="M113 172 C104 142 101 104 112 80 C124 56 150 40 180 37 C212 34 250 40 270 60 C284 76 287 110 285 140 C284 152 283 162 281 172 Z" :fill="url('hair')" />
 
-          <!-- shirt -->
-          <path :d="shirt" fill="#c9a686" />
-          <path :d="shirt" :fill="url('weave')" />
-          <path d="M168 300 L232 300 L200 360 Z" fill="#b97b5a" />
-          <path d="M200 356 L200 430" stroke="#a9876a" stroke-width="3" />
-          <circle cx="200" cy="380" r="4.5" fill="#efe4d4" />
-          <circle cx="200" cy="414" r="4.5" fill="#efe4d4" />
-          <path d="M158 288 C162 300 172 316 197 356 L166 346 L144 304 Z" fill="#d8b999" />
-          <path d="M242 288 C238 300 228 316 203 356 L234 346 L256 304 Z" fill="#d8b999" />
-          <path d="M158 288 C162 300 172 316 197 356 M242 288 C238 300 228 316 203 356" fill="none"
-            stroke="#a9876a" stroke-width="2" />
+            <!-- ears -->
+            <path d="M123 172 C114 166 106 172 107 186 C108 200 113 212 124 216 Z" fill="#d69c86" />
+            <path d="M121 180 C116 178 113 184 114 191 C115 199 118 205 122 207" fill="none" stroke="#a9695a" stroke-width="2.4" stroke-linecap="round" />
+            <path d="M277 168 C286 162 294 168 293 182 C292 196 287 208 276 212 Z" fill="#d69c86" />
+            <path d="M279 176 C284 174 287 180 286 187 C285 195 282 201 278 203" fill="none" stroke="#a9695a" stroke-width="2.4" stroke-linecap="round" />
 
-          <!-- head (tilts toward the cursor) -->
-          <g class="avatar-head" :style="{ transform: `rotate(${tilt}deg)` }">
-            <ellipse cx="127" cy="210" rx="13" ry="21" fill="#cf9372" />
-            <ellipse cx="129" cy="211" rx="6" ry="12" fill="#b97b5a" />
-            <ellipse cx="273" cy="210" rx="13" ry="21" fill="#cf9372" />
-            <ellipse cx="271" cy="211" rx="6" ry="12" fill="#b97b5a" />
-
-            <path d="M128 172 C128 94 272 94 272 172 L273 222 C272 270 242 298 200 300 C158 298 128 270 127 222 Z"
-              fill="#d9a17d" />
-            <ellipse cx="200" cy="142" rx="50" ry="18" fill="#e6b592" opacity=".5" />
-            <ellipse cx="160" cy="222" rx="14" ry="8" fill="#e08f78" opacity=".25" />
-            <ellipse cx="240" cy="222" rx="14" ry="8" fill="#e08f78" opacity=".25" />
-
-            <!-- beard -->
-            <path
-              d="M126 198 L136 198 C138 224 148 244 168 252 C178 246 189 244 200 246 C211 244 222 246 232 252 C252 244 262 224 264 198 L274 198 C277 256 258 300 200 312 C142 300 123 256 126 198 Z"
-              fill="#1f1b21" />
-            <path
-              d="M146 270 C160 294 180 302 200 305 C220 302 240 294 254 270 C246 294 228 308 200 314 C172 308 154 294 146 270 Z"
-              fill="#131015" opacity=".75" />
-            <path d="M170 280 l2 6 M186 288 l1 6 M214 288 l-1 6 M230 280 l-2 6 M200 292 v6" stroke="#3a3440"
-              stroke-width="1.6" stroke-linecap="round" />
+            <!-- face -->
+            <path d="M124 150 C122 108 150 86 200 86 C250 86 278 108 276 150 L276 214 C275 262 244 304 200 308 C156 304 125 262 124 214 Z" :fill="url('skin')" />
+            <g :clip-path="url('face')">
+              <path d="M118 98 C150 84 250 84 282 98 L282 116 C250 102 150 102 118 116 Z" fill="#8f5646" opacity=".35" :filter="url('softer')" />
+              <ellipse cx="200" cy="128" rx="46" ry="16" fill="#eab8a2" opacity=".55" :filter="url('softer')" />
+              <ellipse cx="164" cy="170" rx="22" ry="7" fill="#9c5f4f" opacity=".22" :filter="url('soft')" />
+              <ellipse cx="236" cy="170" rx="22" ry="7" fill="#9c5f4f" opacity=".22" :filter="url('soft')" />
+              <ellipse cx="151" cy="208" rx="16" ry="10" fill="#dc7f76" opacity=".2" :filter="url('soft')" />
+              <ellipse cx="249" cy="208" rx="16" ry="10" fill="#dc7f76" opacity=".2" :filter="url('soft')" />
+              <path d="M124 150 L124 230 L134 230 C130 200 128 176 130 150 Z M276 150 L276 230 L266 230 C270 200 272 176 270 150 Z" fill="#a8695a" opacity=".18" :filter="url('soft')" />
+              <ellipse cx="153" cy="203" rx="13" ry="8" fill="#f3c6b1" opacity=".45" :filter="url('soft')" />
+              <ellipse cx="247" cy="203" rx="13" ry="8" fill="#f3c6b1" opacity=".45" :filter="url('soft')" />
+            </g>
 
             <!-- nose -->
-            <path d="M205 196 C207 208 211 216 212 224" fill="none" stroke="#b97b5a" stroke-width="3"
-              stroke-linecap="round" opacity=".7" />
-            <path d="M189 224 C192 233 208 233 211 224 C206 229 194 229 189 224 Z" fill="#a8664a" />
-            <path d="M186 222 C184 229 188 233 193 231 M214 222 C216 229 212 233 207 231" fill="none"
-              stroke="#b97b5a" stroke-width="2.5" stroke-linecap="round" />
+            <path d="M192 180 C191 194 187 204 182 211 L188 212 C192 203 195 192 196 180 Z" fill="#b0735f" opacity=".35" :filter="url('soft')" />
+            <path d="M176 222 C176 214 184 210 190 212 C194 206 206 206 210 212 C216 210 224 214 224 222 C224 229 216 232 208 230 C204 232 196 232 192 230 C184 232 176 229 176 222 Z" fill="#c78a74" opacity=".45" :filter="url('soft')" />
+            <path d="M184 226 C190 233 210 233 216 226 C212 230 206 231.5 200 231.5 C194 231.5 188 230 184 226 Z" fill="#9c5f4f" opacity=".5" :filter="url('tiny')" />
+            <ellipse cx="180" cy="221" rx="6" ry="6.5" fill="#bf816c" opacity=".45" :filter="url('tiny')" />
+            <ellipse cx="220" cy="221" rx="6" ry="6.5" fill="#bf816c" opacity=".45" :filter="url('tiny')" />
+            <ellipse cx="200" cy="215" rx="12" ry="9" fill="#f1c2ad" opacity=".8" :filter="url('soft')" />
+            <ellipse cx="201" cy="213" rx="4" ry="2.6" fill="#fbe0d3" opacity=".7" :filter="url('tiny')" />
+            <path d="M177 211 C170 215 169 225 177 229.5" fill="none" stroke="#a8695a" stroke-width="2.2" stroke-linecap="round" opacity=".85" />
+            <path d="M223 211 C230 215 231 225 223 229.5" fill="none" stroke="#a8695a" stroke-width="2.2" stroke-linecap="round" opacity=".85" />
+            <path d="M185 228 C188 224 195 224.5 197 229 C193 231 188 230.5 185 228 Z" fill="#7d4638" />
+            <path d="M215 228 C212 224 205 224.5 203 229 C207 231 212 230.5 215 228 Z" fill="#7d4638" />
+            <path d="M197 229 C199 230.5 201 230.5 203 229" fill="none" stroke="#a8695a" stroke-width="1.2" stroke-linecap="round" opacity=".6" />
 
-            <!-- lips + moustache -->
-            <path :d="cool ? smirk : smile" fill="#a45f4d" class="avatar-morph" />
-            <path
-              d="M178 247 C186 240 195 240 200 243 C205 240 214 240 222 247 C226 250 228 254 226 256 C219 251 210 249 200 250 C190 249 181 251 174 256 C172 254 174 250 178 247 Z"
-              fill="#1f1b21" />
+            <!-- beard -->
+            <path :d="tex.stubble" stroke="#2a2629" stroke-width=".9" stroke-linecap="round" opacity=".28" />
+            <path :d="tex.beard" :fill="url('beardG')" opacity=".35" :filter="url('tiny')" />
+            <path :d="tex.beard" :fill="url('beardG')" />
+            <path :d="tex.cheek" stroke="#221f22" stroke-width="1.3" stroke-linecap="round" opacity=".9" />
+            <path :d="tex.edge" stroke="#1b191c" stroke-width="1.5" stroke-linecap="round" />
+            <path :d="tex.strands" fill="none" stroke="#39343a" stroke-width=".9" stroke-linecap="round" opacity=".45" />
+            <ellipse cx="200" cy="292" rx="34" ry="14" fill="#4a4448" opacity=".25" :filter="url('softer')" />
+            <ellipse cx="200" cy="273" rx="8" ry="5" fill="#7a5d58" opacity=".35" :filter="url('soft')" />
+
+            <!-- mouth -->
+            <path :d="cool ? smirk : smile" fill="#c9837f" class="avatar-morph" />
+            <ellipse cx="200" cy="257" rx="10" ry="2.2" fill="#e8aba6" opacity=".55" />
+            <path d="M186 263 C194 265.5 206 265.5 214 263" fill="none" stroke="#9c5f4f" stroke-width="1" opacity=".35" />
+
+            <!-- moustache -->
+            <path :d="moustache" fill="#1c1a1d" />
+            <path :d="tex.moustache" stroke="#3d383c" stroke-width="1" stroke-linecap="round" opacity=".6" :clip-path="url('stache')" />
+
+            <!-- eyes -->
+            <path d="M148 189 C155 192.5 171 192.5 179 188 M252 189 C245 192.5 229 192.5 221 188" fill="none" stroke="#a8695a" stroke-width="1.4" stroke-linecap="round" opacity=".25" />
+            <g class="avatar-eyes" :class="{ 'avatar-eyes--animated': !reducedMotion }">
+              <path :d="eyeLeft" fill="#efe4dd" />
+              <path :d="eyeRight" fill="#efe4dd" />
+              <g :clip-path="url('eyeL')">
+                <g class="avatar-iris" :style="irisStyle"><circle cx="164" cy="177.5" r="6" :fill="url('iris')" /><circle cx="164" cy="177.5" r="2.7" fill="#130d0a" /><circle cx="166" cy="175.6" r="1.4" fill="#fff" /></g>
+                <path d="M144 168 H184 V177 C176 174 154 174 144 178 Z" fill="#3b1f18" opacity=".22" /></g>
+              <g :clip-path="url('eyeR')">
+                <g class="avatar-iris" :style="irisStyle"><circle cx="236" cy="177.5" r="6" :fill="url('iris')" /><circle cx="236" cy="177.5" r="2.7" fill="#130d0a" /><circle cx="238" cy="175.6" r="1.4" fill="#fff" /></g>
+                <path d="M216 168 H256 V177 C248 174 226 174 216 178 Z" fill="#3b1f18" opacity=".22" /></g>
+              <path d="M146 179.5 C152 172.8 172 171 182.5 177.8 M254 179.5 C248 172.8 228 171 217.5 177.8" fill="none" stroke="#1d1618" stroke-width="3" stroke-linecap="round" />
+              <path d="M149 181.8 C156 184.2 172 184 179 180 M251 181.8 C244 184.2 228 184 221 180" fill="none" stroke="#9c5f4f" stroke-width="1.1" stroke-linecap="round" opacity=".55" />
+            </g>
+            <path d="M145 176 C150 167 172 165 183 173 C172 169.5 154 170 145 176 Z M255 176 C250 167 228 165 217 173 C228 169.5 246 170 255 176 Z" fill="#b97a66" opacity=".45" />
+            <path d="M146 174.5 C152 166.8 171 165.2 181 170.8 M254 174.5 C248 166.8 229 165.2 219 170.8" fill="none" stroke="#9c5f4f" stroke-width="1.5" stroke-linecap="round" opacity=".6" />
 
             <!-- brows -->
             <g class="avatar-brows" :class="{ 'avatar-brows--up': browsUp }">
-              <path d="M149 172 C158 160 177 158 191 163 L190 171 C178 167 162 168 152 178 Z" fill="#1c1b22" />
-              <path d="M251 172 C242 160 223 158 209 163 L210 171 C222 167 238 168 248 178 Z" fill="#1c1b22" />
+            <path d="M191 154 C184 150.5 171 148.5 160 148.5 C149 148.5 140 154 134 163 C141 160 151 158.5 161 158.5 C171 158.5 182 160 190 162.5 C193 160.5 193 156 191 154 Z" fill="#1f1d21" />
+            <path d="M209 154 C216 150.5 229 148.5 240 148.5 C251 148.5 260 154 266 163 C259 160 249 158.5 239 158.5 C229 158.5 218 160 210 162.5 C207 160.5 207 156 209 154 Z" fill="#1f1d21" />
+            <path :d="tex.brows" stroke="#1f1d21" stroke-width="1.1" stroke-linecap="round" opacity=".8" />
+
             </g>
 
-            <!-- eyes -->
-            <g class="avatar-eyes" :class="{ 'avatar-eyes--animated': !reducedMotion }">
-              <path :d="eyeLeft" fill="#fbf7f2" />
-              <path :d="eyeRight" fill="#fbf7f2" />
-              <g :clip-path="url('eyeL')">
-                <g class="avatar-iris" :style="irisStyle">
-                  <circle cx="172" cy="190" r="7" fill="#4a2c1d" />
-                  <circle cx="172" cy="190" r="3.4" fill="#120c09" />
-                  <circle cx="174.5" cy="187.5" r="1.6" fill="#fff" />
-                </g>
-              </g>
-              <g :clip-path="url('eyeR')">
-                <g class="avatar-iris" :style="irisStyle">
-                  <circle cx="228" cy="190" r="7" fill="#4a2c1d" />
-                  <circle cx="228" cy="190" r="3.4" fill="#120c09" />
-                  <circle cx="230.5" cy="187.5" r="1.6" fill="#fff" />
-                </g>
-              </g>
-              <path d="M155 191 C162 180 181 180 188 190 M245 191 C238 180 219 180 212 190" fill="none"
-                stroke="#1c1b22" stroke-width="2.8" stroke-linecap="round" />
+            <!-- hair (front) -->
+            <path d="M113 172 C104 142 101 104 112 80 C124 56 150 40 180 37 C212 34 250 40 270 60 C284 76 287 110 285 140 C284 152 283 162 281 172 L272 172 C270 152 267 132 259 117 C250 104 232 97 212 94 C196 91 172 90 152 94 C138 98 129 106 127 120 C125 136 123 152 122 172 Z" :fill="url('hair')" />
+            <path d="M128 100 C146 70 196 52 262 64 C228 60 188 66 160 80 C146 87 136 94 128 104 Z" fill="#34353d" />
+            <path d="M140 92 C160 66 204 52 258 60 C274 64 282 76 284 90 C270 74 240 68 206 72 C180 75 158 84 140 98 Z" fill="#383943" opacity=".55" :filter="url('tiny')" />
+            <path :d="tex.hairFuzz" stroke="#1c1d22" stroke-width="1.4" stroke-linecap="round" />
+            <g fill="none" stroke-linecap="round">
+              <path :d="tex.hairStrands" stroke="#0f1013" stroke-width="1.3" opacity=".7" />
+              <path :d="tex.hairShine" stroke="#4a4b57" stroke-width="1.1" opacity=".75" />
+              <path :d="tex.hairGrey" stroke="#a9a7b3" stroke-width=".8" opacity=".45" />
             </g>
-            <path d="M162 201 C168 204 176 204 182 201 M238 201 C232 204 224 204 218 201" fill="none"
-              stroke="#b97b5a" stroke-width="2" stroke-linecap="round" opacity=".7" />
-
-            <!-- hair -->
-            <path
-              d="M132 192 C123 162 121 128 134 102 C147 74 172 54 206 50 C242 46 272 62 282 92 C291 122 285 162 268 192 L264 192 C264 170 262 150 255 136 C245 122 229 116 211 116 C189 115 166 120 150 132 C142 142 138 162 137 192 Z"
-              fill="#1c1b22" />
-            <path d="M132 192 C124 164 123 142 129 124 L146 136 C140 152 138 170 137 192 Z" fill="#3b3843" />
-            <path d="M268 192 C278 166 281 144 277 124 L257 134 C262 150 264 170 264 192 Z" fill="#3b3843" />
-            <path d="M148 132 C158 96 194 70 240 72 C262 74 276 86 283 100 C263 86 238 84 214 90 C188 98 166 114 148 132 Z"
-              fill="#302e3a" />
-            <path d="M160 120 C176 98 204 86 234 86" fill="none" stroke="#45424f" stroke-width="3"
-              stroke-linecap="round" />
-            <path d="M150 132 C166 120 188 115 211 116 C229 116 245 122 255 136" fill="none" stroke="#111015"
-              stroke-width="3" stroke-linecap="round" />
-            <path d="M176 76 C200 64 234 62 262 76" fill="none" stroke="#8f8d99" stroke-width="1.6"
-              stroke-linecap="round" opacity=".55" />
-            <path d="M170 94 C192 80 222 76 250 82" fill="none" stroke="#8f8d99" stroke-width="1.2"
-              stroke-linecap="round" opacity=".4" />
-
+            <path d="M128 112 C134 100 146 95 160 92 C176 90 196 90.5 212 93.5 C232 97 250 104 259 117" fill="none" stroke="#0d0e11" stroke-width="1.8" stroke-linecap="round" opacity=".8" />
             <!-- sunglasses (easter egg) -->
             <g class="avatar-shades" :class="{ 'avatar-shades--on': cool }">
-              <path d="M146 182 L128 186 M254 182 L272 186" stroke="#030712" stroke-width="4" stroke-linecap="round" />
-              <path d="M146 176 H194 V190 C194 202 186 210 174 210 H166 C154 210 146 202 146 190 Z" :fill="url('lens')" />
-              <path d="M206 176 H254 V190 C254 202 246 210 234 210 H226 C214 210 206 202 206 190 Z" :fill="url('lens')" />
-              <path d="M192 180 C196 175 204 175 208 180" fill="none" stroke="#030712" stroke-width="4" />
-              <path d="M154 182 L166 182 L156 200 Z M214 182 L226 182 L216 200 Z" fill="#fff" opacity=".22" />
+              <path d="M140 171 L121 176 M260 171 L279 176" stroke="#030712" stroke-width="4" stroke-linecap="round" />
+              <path d="M140 167 H188 V180 C188 192 180 199 168 199 H160 C148 199 140 192 140 180 Z" :fill="url('lens')" />
+              <path d="M212 167 H260 V180 C260 192 252 199 240 199 H232 C220 199 212 192 212 180 Z" :fill="url('lens')" />
+              <path d="M188 171 C194 166 206 166 212 171" fill="none" stroke="#030712" stroke-width="4" />
+              <path d="M148 172 L160 172 L150 190 Z M220 172 L232 172 L222 190 Z" fill="#fff" opacity=".22" />
+            </g>
             </g>
           </g>
-        </g>
       </svg>
     </button>
 
@@ -152,6 +159,8 @@
 </template>
 
 <script>
+import tex from './avatarTextures';
+
 let uid = 0;
 
 export default {
@@ -165,11 +174,13 @@ export default {
       browsUp: false,
       bubble: false,
       reducedMotion: false,
-      eyeLeft: 'M156 191 C162 181 181 181 187 190 C180 197 164 198 156 191 Z',
-      eyeRight: 'M244 191 C238 181 219 181 213 190 C220 197 236 198 244 191 Z',
-      shirt: 'M14 430 C22 356 80 322 158 298 C172 316 228 316 242 298 C320 322 378 356 386 430 Z',
-      smile: 'M186 256 C193 261 207 261 214 256 C209 264 191 264 186 256 Z',
-      smirk: 'M186 255 C194 259 208 258 217 252 C211 264 192 265 186 255 Z',
+      eyeLeft: 'M146 179 C152 173.5 172 172 182 178 C174 182.3 153 182.8 146 179 Z',
+      eyeRight: 'M254 179 C248 173.5 228 172 218 178 C226 182.3 247 182.8 254 179 Z',
+      shirt: 'M10 430 C18 352 78 318 152 296 C168 318 232 318 248 296 C322 318 382 352 390 430 Z',
+      moustache:
+        'M148 262 C148 248 160 238 176 234 C187 231 194 230 200 232 C206 230 213 231 224 234 C240 238 252 248 252 262 C246 256 237 252 226 252 C216 251 208 252 200 252 C192 252 184 251 174 252 C163 252 154 256 148 262 Z',
+      smile: 'M174 249 C184 254 216 254 226 249 C222 259 211 263.5 200 263.5 C189 263.5 178 259 174 249 Z',
+      smirk: 'M174 249 C184 254 216 253 227 247 C224 258 212 263 201 263.5 C190 263.5 178 259 174 249 Z',
     };
   },
   computed: {
@@ -179,6 +190,10 @@ export default {
     bubbleText() {
       return this.cool ? 'Shipping to prod on a Friday 😎' : "Hi, I'm Jatin 👋";
     },
+  },
+  created() {
+    // Static art data; no need for it to be reactive.
+    this.tex = tex;
   },
   mounted() {
     this.reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -214,17 +229,17 @@ export default {
       const r = this.$refs.root.getBoundingClientRect();
       // The eyes sit a little above the vertical centre of the artwork.
       const dx = x - (r.left + r.width / 2);
-      const dy = y - (r.top + r.height * 0.475);
+      const dy = y - (r.top + r.height * 0.445);
       const dist = Math.hypot(dx, dy) || 1;
       const reach = Math.min(dist / (r.width * 0.8), 1);
-      this.look = { x: (dx / dist) * 3.6 * reach, y: (dy / dist) * 2.4 * reach };
+      this.look = { x: (dx / dist) * 3.2 * reach, y: (dy / dist) * 1.6 * reach };
       this.tilt = Math.max(-1, Math.min(1, dx / (window.innerWidth / 2))) * 3;
     },
     idleGlance() {
       if (Date.now() - (this.lastPointer || 0) < 4000) return;
       const angle = Math.random() * Math.PI * 2;
       const mag = Math.random() < 0.35 ? 0 : 1;
-      this.look = { x: Math.cos(angle) * 3.2 * mag, y: Math.sin(angle) * 2 * mag };
+      this.look = { x: Math.cos(angle) * 3 * mag, y: Math.sin(angle) * 1.4 * mag };
       this.tilt = 0;
     },
     toggleCool() {
